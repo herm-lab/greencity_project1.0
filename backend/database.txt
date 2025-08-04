@@ -1,0 +1,23 @@
+{
+  "A12345": {
+    "name": "Kristal",
+    "class": "10A",
+    "waste": {
+      "lids": 6,
+      "plastic": 0,
+      "batteries": 0
+    }
+  }
+}
+
+{
+  "A12344": {
+    "name": "Kristal",
+    "class": "10A",
+    "waste": {
+      "lids": 6,
+      "plastic": 0,
+      "batteries": 0
+    }
+  }
+}

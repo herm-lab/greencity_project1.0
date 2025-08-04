@@ -1,0 +1,57 @@
+from kivy.uix.screenmanager import Screen
+from kivy.lang import Builder
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+
+# Импортируем функцию check_user из api.py
+from ..api import check_user
+
+Builder.load_string('''
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 20
+
+        Label:
+            text: 'GreenCity - Вход'
+            font_size: 24
+
+        TextInput:
+            id: code_input
+            hint_text: 'Ваш код (A12345)'
+            multiline: False
+            font_size: 18
+            size_hint_y: None
+            height: 50
+
+        Button:
+            text: 'Войти'
+            size_hint_y: None
+            height: 50
+            on_press: root.login()
+''')
+
+
+class LoginScreen(Screen):
+    def login(self):
+        code = self.ids.code_input.text
+        if not self.validate_code(code):
+            self.show_error("Неверный формат кода! Пример: A12345")
+            return
+
+        if check_user(code):  # Теперь функция доступна
+            self.manager.current = 'home'
+            self.manager.get_screen('home').user_code = code
+        else:
+            self.show_error("Пользователь не найден")
+
+    def validate_code(self, code):
+        import re
+        return re.match(r'^[A-Z]\d{5}$', code) is not None
+
+    def show_error(self, message):
+        popup = Popup(title='Ошибка',
+                      content=Label(text=message),
+                      size_hint=(0.8, 0.4))
+        popup.open()
