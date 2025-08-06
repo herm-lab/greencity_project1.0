@@ -2,8 +2,11 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-from frontend.api import create_user  # Или используйте относительный импорт, как было ранее
+from frontend.api import create_user
+#поменять на относительный из frontend.api
 
+
+#улучшить дизайн
 Builder.load_string('''
 <AdminScreen>:
     BoxLayout:
@@ -59,7 +62,7 @@ class AdminScreen(Screen):
             self.show_message(
                 f"Аккаунт создан!\nКод ученика: {code}\n"
                 "Сообщите этот код ученику!",
-                title="Успех"
+                title="Успешно"
             )
             self.ids.name_input.text = ""
             self.ids.class_input.text = ""
@@ -71,6 +74,6 @@ class AdminScreen(Screen):
         popup = Popup(
             title=title,
             content=content,
-            size_hint=(0.8, 0.5)  # Убедитесь, что здесь нет лишних символов
+            size_hint=(0.8, 0.5)
         )
         popup.open()

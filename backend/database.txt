@@ -1,22 +1,21 @@
 {
   "A12345": {
-    "name": "Kristal",
+    "name": "henry",
     "class": "10A",
     "waste": {
-      "lids": 6,
-      "plastic": 0,
+      "lids": 9,
+      "plastic": 8,
       "batteries": 0
     }
   }
-}
-
+},
 {
   "A12344": {
-    "name": "Kristal",
+    "name": "henry",
     "class": "10A",
     "waste": {
-      "lids": 6,
-      "plastic": 0,
+      "lids": 9,
+      "plastic": 8,
       "batteries": 0
     }
   }

@@ -54,7 +54,7 @@ class ProfileScreen(Screen):
         self.ids.stats_info.text = '\n'.join(stats_text)
 
     def get_user_stats(self):
-        # Получаем код из home screen
+        #Из home
         user_code = self.manager.get_screen('home').user_code
         from frontend.api import get_user_stats
         return get_user_stats(user_code)

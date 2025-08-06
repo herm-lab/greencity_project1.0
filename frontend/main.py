@@ -1,3 +1,5 @@
+#ХЗ ЧТО ТУТ ПРОИСХОДИТ(НЕ РЕДАКТИРОВАТЬ!!!!!!!)
+
 import os
 import sys
 from kivy.app import App
