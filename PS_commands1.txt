@@ -1,0 +1,77 @@
+#Очистка кэша Python (.pyc файлы)
+find . -name "*.pyc" -exec rm -f {} \;
+
+#Очистка кэша PyCharm (внутренние файлы IDE)
+rm -rf .idea/
+
+#Проверка работоспособности pip
+python -m pip --version
+
+#Переустановка pip
+python -m ensurepip --upgrade
+
+#Проверка устаревших пакетов
+pip list --outdated
+
+#Обновление всех пакетов
+pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U
+
+#Проверка занятых портов (если проект использует сервер)
+lsof -i :'port num(5000 or 8000 exp)'/netstat -tulnp | grep :port num(5000 or 8000 exp)
+
+#Удаление venv/создание venv
+rm -rf venv / && python -m venv venv && source venv/bin/activate
+
+#Запуск HTTP-сервера для тестирования (например, фронтенда)
+python -m http.server port num(5000 or 8000 exp)
+
+#Проверка размера директорий в проекте
+du -sh * | sort -h
+
+#Быстрый перезапуск PyCharm (если завис)
+pkill -f "pycharm" && nohup pycharm > /dev/null 2>&1 &
+
+
+
+           __ЗАПРОСЫ__
+
+#Отправить GET-запрос (cURL)
+curl -X GET "https://api.example.com/data"
+
+#Отправить POST-запрос с JSON (cURL)
+curl -X POST "https://api.example.com/create" -H "Content-Type: application/json" -d '{"name": "John", "age": 30}'
+
+#Отправить PUT/PATCH-запрос (cURL)
+curl -X PUT "https://api.example.com/update/1" -H "Content-Type: application/json" -d '{"name": "John Doe"}'
+
+#Отправить DELETE-запрос (cURL)
+curl -X DELETE "https://api.example.com/delete/1"
+
+#Генерация JWT-токена (если есть jq)
+echo '{"sub": "123", "name": "John"}' | jq -R -s '{"token": (. | @base64)}'
+
+#Отправить запрос через SOCKS5 (например, Tor)
+curl --socks5-hostname localhost:9050 "https://api.example.com"
+
+#Проверить CORS-заголовки API
+curl -X OPTIONS -H "Origin: http://your-site.com" -H "Access-Control-Request-Method: GET" "https://api.example.com"
+
+#Поиск уязвимостей в зависимостях (safety)
+pip install safety && safety check
+
+#Генерация отчёта о покрытии в HTML
+pytest --cov=. --cov-report=html
+
+#Профилирование кода (cProfile)
+python -m cProfile -s time script.py
+
+#Установка пакета в режиме разработки
+pip install -e
+
+            __GIT UND GITHUB__
+#Инициализация Git
+git init
+
+#
+
+

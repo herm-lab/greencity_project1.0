@@ -11,7 +11,7 @@ Builder.load_string('''
         spacing: 20
 
         Label:
-            text: 'Мой профиль'
+            text: 'Профиль'
             font_size: 24
 
         Label:

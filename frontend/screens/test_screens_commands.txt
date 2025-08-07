@@ -1,0 +1,5 @@
+#Тестинг для каждого скрина(в терминал)
+python frontend/screens/test_login.py
+python frontend/screens/test_home.py
+python frontend/screens/test_profile.py
+python frontend/screens/test_admin.py

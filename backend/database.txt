@@ -8,7 +8,7 @@
       "batteries": 0
     }
   }
-},
+};
 {
   "A12344": {
     "name": "henry",
