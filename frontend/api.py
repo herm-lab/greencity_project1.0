@@ -4,7 +4,6 @@ from requests.exceptions import RequestException
 BASE_URL = "http://localhost:5000/api"
 
 def check_user(code):
-    #Проверка на сущ. пользователя
     try:
         response = requests.post(
             f"{BASE_URL}/check-user",
@@ -12,17 +11,16 @@ def check_user(code):
             timeout=5
         )
         return response.json().get('exists', False)
-    except RequestException:
+    except RequestException as e:
+        print(f"[API ERROR] check_user: {str(e)}")
         return False
 
 def get_user_stats(code):
     try:
-        response = requests.get(
-            f"{BASE_URL}/user-stats/{code}",
-            timeout=5
-        )
+        response = requests.get(f"{BASE_URL}/user-stats/{code}", timeout=5)
         return response.json()
     except RequestException as e:
+        print(f"[API ERROR] get_user_stats: {str(e)}")
         return {'error': str(e)}
 
 def add_waste(user_code, waste_type, amount):
@@ -38,18 +36,17 @@ def add_waste(user_code, waste_type, amount):
         )
         return response.json()
     except RequestException as e:
+        print(f"[API ERROR] add_waste: {str(e)}")
         return {'error': str(e)}
 
 def create_user(name, class_info):
     try:
         response = requests.post(
             f"{BASE_URL}/create-user",
-            json={
-                'name': name,
-                'classInfo': class_info
-            },
+            json={'name': name, 'classInfo': class_info},
             timeout=5
         )
         return response.json()
     except RequestException as e:
+        print(f"[API ERROR] create_user: {str(e)}")
         return {'error': str(e)}
