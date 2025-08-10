@@ -2,24 +2,23 @@ greencity_project
 │
 ├── venv/           # Папка виртуального окружения 
 ├── backend/        # Все файлы бэкенда
-│   ├── app.py
-│   ├── requirements.txt
-│   ├── db/
-         ├── database.txt
-         ├──init.sql
-│   └── models/
-         ├── user.py
-         ├── waste.py
-│
+│   ├── api.py
+│   ├──requirements.txt
+    ├──users.db
 ├── frontend/       # Все файлы фронтенда
 │   ├── main.py
-    ├── api.py
+    ├── api_client.py
 │   ├── screens/
          ├── __init__.py
          ├── admin.py
          ├── home.py
          ├── login.py
          ├── profile.py
+         ├── test_home.py
+         ├── test_admin.py
+         ├── test_login.py
+         ├── test_profile.py
+         ├── test_screens_commands
 │   └── widgets/
          ├──waste_card.py
 │
@@ -68,3 +67,14 @@ psycopg2-binary==2.9.6
 python-dotenv==1.0.0
 flask-cors==3.0.10
 SQLAlchemy==1.4.48
+
+
+
+    Компонент	       |             Назначение	                                            |        Зависимости
+frontend/main.py	   | Точка входа, управление экранами (ScreenManager)	                |    Все screens/*.py
+frontend/screens/	   | Окна приложения: авторизация, главный экран, профиль, админ-панель | api_client.py, widgets/*.py
+frontend/api_client.py |	 Отправляет запросы к бэкенду (Flask API)	                    |         requests
+backend/api.py	       |  Обрабатывает API-запросы, работает с БД (users.db)	            |     Flask, SQLAlchemy
+users.db	           |  Хранит данные пользователей (код, имя, класс, кол-во вторсырья)	|         SQLite
+
+Код ученика: L07492
