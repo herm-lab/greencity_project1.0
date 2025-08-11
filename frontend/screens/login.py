@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-from frontend.api import check_user
+from frontend.api_client import check_user
 
 Builder.load_string('''
 <LoginScreen>:

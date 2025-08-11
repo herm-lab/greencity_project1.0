@@ -1,18 +1,15 @@
-#ХЗ ЧТО ТУТ ПРОИСХОДИТ(НЕ РЕДАКТИРОВАТЬ!!!!!!!)
-
 import os
 import sys
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
-
-# Добавляем корневую папку в путь поиска модулей
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# Теперь можно использовать абсолютные импорты
+from frontend.screens.user_management import UserManagementScreen
 from frontend.screens.login import LoginScreen
 from frontend.screens.home import HomeScreen
 from frontend.screens.profile import ProfileScreen
 from frontend.screens.admin import AdminScreen
+
+#root dir
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 class GreenCityApp(App):
     def build(self):
@@ -21,6 +18,7 @@ class GreenCityApp(App):
         sm.add_widget(HomeScreen(name='home'))
         sm.add_widget(ProfileScreen(name='profile'))
         sm.add_widget(AdminScreen(name='admin'))
+        sm.add_widget(UserManagementScreen(name='user_management'))
         return sm
 
 if __name__ == '__main__':

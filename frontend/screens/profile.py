@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
+from frontend.api_client import get_user_stats  # Исправленный импорт
 
 Builder.load_string('''
 <ProfileScreen>:
@@ -11,7 +12,7 @@ Builder.load_string('''
         spacing: 20
 
         Label:
-            text: 'Профиль'
+            text: 'Мой профиль'
             font_size: 24
 
         Label:
@@ -39,25 +40,21 @@ Builder.load_string('''
 
 class ProfileScreen(Screen):
     def on_pre_enter(self):
-        stats = self.get_user_stats()
+        stats = get_user_stats(self.manager.get_screen('home').user_code)
         if 'error' in stats:
             self.show_error(stats['error'])
             return
 
         self.ids.user_info.text = f"{stats['name']}, {stats['classInfo']}"
 
-        stats_text = []
-        for waste_type, count in stats['waste'].items():
-            stats_text.append(f"{waste_type}: {count} шт")
-        stats_text.append(f"\nВсего баллов: {stats['total_points']}")
+        stats_text = [
+            f"Крышки: {stats['waste']['lids']} шт",
+            f"Пластик: {stats['waste']['plastic']} шт",
+            f"Батарейки: {stats['waste']['batteries']} шт",
+            f"\nВсего баллов: {stats.get('total_points', 0)}"
+        ]
 
         self.ids.stats_info.text = '\n'.join(stats_text)
-
-    def get_user_stats(self):
-        #Из home
-        user_code = self.manager.get_screen('home').user_code
-        from frontend.api import get_user_stats
-        return get_user_stats(user_code)
 
     def show_error(self, message):
         Popup(

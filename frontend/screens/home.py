@@ -1,7 +1,8 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
-from frontend.api import add_waste, get_user_stats
+from frontend.api_client import check_user
+from frontend.api_client import add_waste
 from frontend.widgets.waste_card import WasteCard  # Добавлен правильный импорт
 
 Builder.load_string('''
