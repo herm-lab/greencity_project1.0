@@ -46,6 +46,12 @@ Builder.load_string('''
             on_press: root.create_account()
 
         Button:
+            text: 'Управление пользователями'
+            size_hint_y: None
+            height: 50
+            on_press: root.show_user_management()
+
+        Button:
             text: 'Назад'
             size_hint_y: None
             height: 50
@@ -55,7 +61,6 @@ Builder.load_string('''
 
 class AdminScreen(Screen):
     def create_account(self):
-        """Создание нового пользователя"""
         name = self.ids.name_input.text.strip()
         class_info = self.ids.class_input.text.strip()
 
@@ -67,8 +72,7 @@ class AdminScreen(Screen):
 
         if 'code' in response:
             self.show_message(
-                f"Аккаунт создан!\nКод ученика: {response['code']}\n"
-                "Сообщите этот код ученику!",
+                f"Аккаунт создан!\nКод: {response['code']}",
                 "Успех"
             )
             self.ids.name_input.text = ""
@@ -77,8 +81,10 @@ class AdminScreen(Screen):
             error = response.get('error', 'Неизвестная ошибка')
             self.show_message(f"Ошибка: {error}", "Ошибка создания")
 
+    def show_user_management(self):
+        self.manager.current = 'user_management'
+
     def show_message(self, message, title=""):
-        """Всплывающее уведомление"""
         popup = Popup(
             title=title,
             content=Label(text=message),
@@ -90,8 +96,11 @@ class AdminScreen(Screen):
 class AdminApp(App):
     def build(self):
         from kivy.uix.screenmanager import ScreenManager
+        from screens.user_management import UserManagementScreen
+
         sm = ScreenManager()
         sm.add_widget(AdminScreen(name='admin'))
+        sm.add_widget(UserManagementScreen(name='user_management'))
         return sm
 
 
